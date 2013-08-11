@@ -1,17 +1,18 @@
-//Project
-#include <stdio.h>     // - Just for some ASCII messages
+#include <stdio.h>     
 #include <stdlib.h>
 #include <cmath>
 #include <fstream>
 #include <time.h>
 #include <string>
 #include <cstring>
-#include <GL/glut.h>   // - An interface and windows
-                       //   management library
-#include "visuals.h"   // Header file for our OpenGL functions
+#include <GL/glut.h>   
+                       
+#include "visuals.h"   
 
 
 using namespace std;
+
+//////// State Variables ////////
 
 float bunny_v[1458][3];
 int bunny_f[2777][3];
@@ -48,8 +49,9 @@ int t;
 int score = 0, oldscore = 0, level = 0;
 
 
- 
-  void kanoni()
+
+//canon rendering 
+void kanoni()
 {
 	
 	glPushMatrix();
@@ -106,6 +108,7 @@ int score = 0, oldscore = 0, level = 0;
 	   
 }
 
+//ground rendering
 void edafos()
 {	//glTranslatef(0.0, 0.0, -100.0);
 	glPushMatrix();
@@ -127,6 +130,7 @@ void edafos()
 	glPopMatrix(); 	 	
 }
 
+//ui stats rendering
 void pinakas_endei3eon() {
 	glPushMatrix();
 	glTranslatef(0.0, 0.0, -137.5);
@@ -224,7 +228,7 @@ void pinakas_endei3eon() {
 
 }
 
-
+//3d model loading and rendering
 void lagoudaki()
 {   glPushMatrix();
 	//glTranslatef(0.0, 7.5, 0.0);
@@ -268,6 +272,7 @@ void lagoudaki()
     glPopMatrix();
 }
 
+//projectile rendering
 void vlima() {
     glPushMatrix();
 	glTranslatef(vpos[0] , vpos[1] , vpos[2]);
@@ -276,6 +281,7 @@ void vlima() {
     glPopMatrix();
 }
 
+//explosion rendering
 void efe_sygroushs() {
 	glPushMatrix();
 	glTranslatef(efpos[0] , efpos[1] , efpos[2]);
@@ -317,10 +323,9 @@ void Render()
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
   
-  ////gluLookAt(0.0, 2.0, 5.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+
   gluLookAt(0.0, 240.0, 280.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
-  //gluLookAt(0.0, 5.0, 280.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
- ////gluLookAt(0.0, 18.0, 25.0, 0.0, 0.0, -15.0, 0.0, 1.0, 0.0);
+ 
 
   edafos();
   pinakas_endei3eon();
@@ -331,9 +336,8 @@ void Render()
   kanoni();
   if(vlimex == true)
 	vlima();
-  glutSwapBuffers();             // All drawing commands applied to the 
-                                 // hidden buffer, so now, bring forward
-                                 // the hidden buffer and hide the visible one           
+	
+  glutSwapBuffers();                  
 
 }
 
@@ -342,7 +346,7 @@ void Render()
 
 void Resize(int w, int h)
 { 
-  // define the visible area of the window ( in pixels )
+  // define the visible area of the window
   if (h==0) h=1;
   glViewport(0,0,w,h); 
 
@@ -352,9 +356,10 @@ void Resize(int w, int h)
   glLoadIdentity();
  
   gluPerspective(45.0, (float)w/(float)h, 1.0, 500.0);
-  //glOrtho (-80.0f, 80.0f, -80.0f, 80.0f,-600.0f,600.0f);
+ 
 }
 
+//Time, movement and events management
 void Idle()
 {   if(efex == true) 
 	   if((clock()-t)/(float)CLOCKS_PER_SEC > 3)
@@ -486,14 +491,9 @@ void keyboard_handle1(unsigned char key , int x , int y) {
 
 
 
-
-
-
-
-
 //-----------------------------------------------------------
 
-void Setup()  // DON'T TOUCH IT 
+void Setup()
 {
 	/* Load the Bunny */
 	ifstream bfile("bunny2.obj"); 
@@ -540,10 +540,10 @@ void Setup()  // DON'T TOUCH IT
             brmax = tmp;
       
 	}
-   //glEnable( GL_CULL_FACE );
+  
 
    glShadeModel( GL_SMOOTH );
-   //glEnable(NORMALS);
+   
 
    glEnable(GL_DEPTH_TEST);
    glEnable(GL_NORMALIZE);
