@@ -1,6 +1,5 @@
 Simple Game written in C using Opengl and Glut
 
-Άσκηση Γραφικών 2008-2009
 
 Νικόλαος Μπίκος  std06062
 
