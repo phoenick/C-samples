@@ -71,7 +71,7 @@ char * getRecord(CachePtr cache, char *givenPhoneNum){
 		LruListNodePtr item = getItem(cache->hashTable, position);
 		if(item){
 			if(strcmp((const char*)givenPhoneNum, (const char*)getPhoneNumber(item)) == 0){
-			
+				//ToDo
 			
 			}
 			else
